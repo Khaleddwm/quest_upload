@@ -1,14 +1,6 @@
 <?php
 
-
-// liste image upload
-$file = new FilesystemIterator('uploads');
-
-if (isset($_POST['submit'])) {
-    if(unlink($_POST['submit'])) {
-        header("Location:upload.php");
-    }
-}
+// upload.php
 
 // chemin vers un dossier sur le serveur qui va recevoir les fichiers uploadés
 // (attention ce dossier doit être accessible en écriture)
@@ -60,6 +52,15 @@ for($i=0; $i < count($_FILES['avatar']['name']); $i++) {
     }
 }
 
+// liste image upload
+$file = new FilesystemIterator('uploads');
+
+// Option Delete
+if (isset($_POST['submit'])) {
+    if(unlink($_POST['submit'])) {
+        header("Location:upload.php");
+    }
+}
 
 
 
