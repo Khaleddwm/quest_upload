@@ -27,6 +27,7 @@ for($i=0; $i < count($_FILES['avatar']['name']); $i++) {
         'Vous devez uploader un fichier de type png, gif, jpg, txt ou doc...';
     }
     
+    // Si la taille est trop volumineuse
     if($taille > $taille_maxi) {
         $error = 'Votre fichier "' . $filename[$i] . '" n\'est pas conforme' .'<br>' .
         'Le fichier est trop gros...';
@@ -43,8 +44,7 @@ for($i=0; $i < count($_FILES['avatar']['name']); $i++) {
             echo 'Upload du fichier "' . $filename[$i] . '" effectué avec succès !' .'<br>';
         
         // Sinon (la fonction renvoie FALSE).
-        } else {
-            
+        } else {   
             echo 'Echec de l\'upload "' . $filename[$i] . '" !'  .'<br>';
         }
     } else {
@@ -56,7 +56,7 @@ for($i=0; $i < count($_FILES['avatar']['name']); $i++) {
 $file = new FilesystemIterator('uploads');
 
 // Option Delete
-if (isset($_POST['submit'])) {
+if (!empty($_POST['submit'])) {
     if(unlink($_POST['submit'])) {
         header("Location:upload.php");
     }
