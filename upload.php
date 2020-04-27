@@ -29,7 +29,7 @@ for($i = 0; $i < count($_FILES['avatar']['name']); $i++) {
         'Le fichier est trop gros...';
     }
     //S'il n'y a pas d'erreur, on upload
-    if(!isset($erreur)) { 
+    if(!isset($error)) { 
         // A unique name is concatenated with a dot and the $extention avec l'extension récupérée
         $filenameUniq = uniqid() . '.' .$extension;
         // Si la fonction renvoie TRUE, c'est que ça a fonctionné...
