@@ -56,11 +56,11 @@ for($i=0; $i < count($_FILES['avatar']['name']); $i++) {
 $file = new FilesystemIterator('uploads');
 
 // Option Delete
-if (!empty($_POST['submit'])) {
-    if(unlink($_POST['submit'])) {
-        header("Location:upload.php");
-    }
+
+if(unlink($_POST['submit'])) {
+    header('Location:upload.php');
 }
+
 
 
 
