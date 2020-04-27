@@ -13,7 +13,7 @@ $taille_maxi = 1000000;
 $extensions = ['jpg', 'jpeg', 'png', 'gif'];
 
 // Début des vérifications de sécurité...
-for($i=0; $i < count($_FILES['avatar']['name']); $i++) {
+for($i = 0; $i < count($_FILES['avatar']['name']); $i++) {
     // obtenir uniquement l'extension (sans le point)
     $extension = pathinfo($_FILES['avatar']['name'][$i], PATHINFO_EXTENSION);
     // taile du fichier uploadé
@@ -72,9 +72,9 @@ if(unlink($_POST['delete'])) {
             <h2 style="text-align:center; color:yellow" for="imageUpload">Upload image</h2></br>
             <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
             <input class="btn btn-light" type="file" name="avatar[]" multiple="multiple" /></br>
-            <button type="submit" class="btn btn-success">Upload</button>
+            <button class="btn btn-success" type="submit" >Upload</button>
             <div>
-                <a style="color:red" href="upload.php">Rafraichir</a>
+                <a class="btn btn-light" style="color:red" href="upload.php">Rafraichir</a>
             </div>
         </form>
     </div>
