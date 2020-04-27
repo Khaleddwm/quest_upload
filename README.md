@@ -1,4 +1,4 @@
 # quest_upload
 
-**Fonction Delete à revoir**
-_elle est en option_
+**Fonction Delete effectué**
+
