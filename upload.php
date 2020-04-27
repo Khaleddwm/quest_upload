@@ -67,19 +67,18 @@ if(unlink($_POST['delete'])) {
         <h1 style="background-color:black; text-align:center">Quest Upload</h1>
     </div>
     <div class="d-flex justify-content-center">
-        <form class="" method="POST" action="upload.php" enctype="multipart/form-data">
+        <form style="display:flex; flex-direction:column" class="" method="POST" action="upload.php" enctype="multipart/form-data">
             <!-- On limite le fichier à 100Ko -->
-            <h2 style="text-align:center; color:yellow" for="imageUpload">Upload image</h2></br>
+            <h2 style="text-align:center; background-color:darkturquoise; color:yellow" for="imageUpload">Upload image</h2></br>
             <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
             <input class="btn btn-light" type="file" name="avatar[]" multiple="multiple" /></br>
             <button class="btn btn-success" type="submit" >Upload</button>
-            <div>
-                <a class="btn btn-light" style="color:red" href="upload.php">Rafraichir</a>
-            </div>
+            <a class="btn btn-light" style="margin-top:20px; color:red" href="upload.php">Rafraichir</a>
+            
         </form>
     </div>
     <div>
-        <br><h2 style="text-align:center; color:yellow">Avatar en stock :</h2>
+        <br><h2 style="text-align:center; background-color:darkturquoise; color:yellow">Avatar en stock :</h2><br>
     </div>
     <div style="">
         <form  style="" method="post" action="upload.php">
