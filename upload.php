@@ -101,18 +101,17 @@ if (isset($_POST['delete'])) {
         <br><h2 style="text-align:center; background-color:darkturquoise; color:yellow">Avatar en stock :</h2><br>
     </div>
     <div style="">
-        <form  style="" method="post" action="upload.php">
+        <form  style="margin-bottom:50px" method="post" action="upload.php">
         <?php
         foreach ($file as $fileinfo) {
-            echo '<figure class="col-3" style="border:thin #c0c0c0 solid; display:inline-flex; flex-flow:column; padding: 5px; max-width: 220px; margin: auto;">';
-            echo '<img style="max-width:220px; max-height:150px;" src="' . $fileinfo . '" />';
+            echo '<figure class="col-3" style="border:thin #c0c0c0 solid; display:inline-flex; flex-flow:column; padding:5px; max-width:220px; margin:auto;">';
+            echo '<img style="max-width:220px; height:150px" src="' . $fileinfo . '" />';
             echo '<figcaption style="background-color:#222; color:#fff; font:italic smaller sans-serif; padding:3px; text-align:center;">' . $fileinfo->getFilename() . '</figcaption>';
             if (file_exists($fileinfo)) {
                 echo '<button class="btn btn-warning" type="submit"  name="delete" value="' . $fileinfo . '">Delete</button>';
                 echo '</figure>';
             } 
         }
-        
         ?>
         </form>
     </div>        
