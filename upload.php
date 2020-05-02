@@ -21,14 +21,14 @@ if (isset($_POST['upload'])) {
         $size = $_FILES['avatar']['size'][$i];
         // Si l'extension n'est pas dans le tableau
         if(!in_array($extension, $extensions)) {
-            $errors[] = 'Votre fichier "' . $filename[$i] . '" n\'est pas conforme' . '<br>' .
-            'Vous devez uploader un fichier de type png, gif, jpg, txt ou doc...' . '<br>';
+            $errors[] = 'Fichier "' . $filename[$i] . '" non conforme: ' . '<br>' .
+            'vous devez uploader un fichier de type png, gif, jpg, txt ou doc...' . '<br>';
             
         } else {
             // Si la taille est trop volumineuse
             if($size == 0) {
-                $errors[] = 'Votre fichier "' . $filename[$i] . '" n\'est pas conforme' . '<br>' .
-                'Le fichier est trop gros...' . '<br>';
+                $errors[] = 'Fichier "' . $filename[$i] . '" non conforme: ' . '<br>' .
+                'le fichier est trop gros...' . '<br>';
             } else {
                 //S'il n'y a pas d'erreur, on upload
                 // A unique name is concatenated with a dot and the $extention avec l'extension récupérée
@@ -81,15 +81,15 @@ if (isset($_POST['delete'])) {
         </form>
     </div>
     
-        <?php 
+        <?php
         if (isset($messages)) {
-            echo '<br><h3 style="background-color:green; color:white; text-align:center">';
+            echo '<br><h3 class="bg-success text-white" style="text-align:center">';
             foreach ($messages as $value) {
             echo $value;
             }
         }   echo '</h3><br>';
         if (isset($errors)) {
-            echo '<br><h3 style="background-color:red; color:white; text-align:center">';
+            echo '<br><h3 class="bg-danger text-white" style="text-align:center">';
             foreach ($errors as $value) {
             echo $value;
             }
