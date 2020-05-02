@@ -6,7 +6,7 @@
 // (attention ce dossier doit être accessible en écriture)
 $uploadDir = 'uploads/';
 // retour du nom du fichier
-$filename = $_FILES['avatar']['name'];
+$filename = $_FILES['avatars']['name'];
 // taille de fichier accéptés
 $sizeMax = 1048576;
 // Extension accéptées
@@ -14,11 +14,11 @@ $extensions = ['jpg', 'jpeg', 'png', 'gif'];
 
 // Début des vérifications de sécurité...
 if (isset($_POST['upload'])) {
-    for($i = 0; $i < count($_FILES['avatar']['name']); $i++) {
+    for($i = 0; $i < count($_FILES['avatars']['name']); $i++) {
         // obtenir uniquement l'extension (sans le point)
-        $extension = pathinfo($_FILES['avatar']['name'][$i], PATHINFO_EXTENSION);
+        $extension = pathinfo($_FILES['avatars']['name'][$i], PATHINFO_EXTENSION);
         // taile du fichier uploadé
-        $size = $_FILES['avatar']['size'][$i];
+        $size = $_FILES['avatars']['size'][$i];
         // Si l'extension n'est pas dans le tableau
         if(!in_array($extension, $extensions)) {
             $errors[] = 'Fichier "' . $filename[$i] . '" non conforme: ' . '<br>' .
@@ -34,9 +34,9 @@ if (isset($_POST['upload'])) {
                 // A unique name is concatenated with a dot and the $extention avec l'extension récupérée
                 $filenameUniq = uniqid() . '.' .$extension;
                 // Si la fonction renvoie TRUE, c'est que ça a fonctionné...
-                if(move_uploaded_file($_FILES['avatar']['tmp_name'][$i], $uploadDir . $filenameUniq)) {
+                if(move_uploaded_file($_FILES['avatars']['tmp_name'][$i], $uploadDir . $filenameUniq)) {
                     $messages[] = 'Upload du fichier "' . $filename[$i] . '" effectué avec succès !' .'<br>';
-                    // Sinon (la fonction renvoie FALSE).
+                // Sinon (la fonction renvoie FALSE).
                 } else {   
                     $messages[] = 'Echec de l\'upload "' . $filename[$i] . '" !'  .'<br>';
                 } 
@@ -75,7 +75,7 @@ if (isset($_POST['delete'])) {
         <form style="display:flex; flex-direction:column" class="" method="POST" action="upload.php" enctype="multipart/form-data">
             <!-- On limite le fichier à 100Ko -->
             <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
-            <input class="btn btn-light" type="file" name="avatar[]" multiple="multiple" required/></br>
+            <input class="btn btn-light" type="file" name="avatars[]" multiple="multiple" required/></br>
             <button class="btn btn-success" type="submit" name="upload">Upload</button>
             <a class="btn btn-light" style="margin-top:20px; color:red" href="upload.php">Rafraichir</a>
         </form>
