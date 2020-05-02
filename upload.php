@@ -21,31 +21,30 @@ if (isset($_POST['upload'])) {
         $size = $_FILES['avatar']['size'][$i];
         // Si l'extension n'est pas dans le tableau
         if(!in_array($extension, $extensions)) {
-            $error =  'Votre fichier "' . $filename[$i] . '" n\'est pas conforme' . '<br>' .
-            'Vous devez uploader un fichier de type png, gif, jpg, txt ou doc...';
-        }
-        // Si la taille est trop volumineuse
-        if($size > $sizeMax) {
-            $error = 'Votre fichier "' . $filename[$i] . '" n\'est pas conforme' . '<br>' .
-            'Le fichier est trop gros...';
-        }
-        //S'il n'y a pas d'erreur, on upload
-        if(!isset($error)) { 
-            // A unique name is concatenated with a dot and the $extention avec l'extension récupérée
-            $filenameUniq = uniqid() . '.' .$extension;
-            // Si la fonction renvoie TRUE, c'est que ça a fonctionné...
-            if(move_uploaded_file($_FILES['avatar']['tmp_name'][$i], $uploadDir . $filenameUniq)) {
-                $message[] = 'Upload du fichier "' . $filename[$i] . '" effectué avec succès !' .'<br>';
-            // Sinon (la fonction renvoie FALSE).
-            } else {   
-                $message[] = 'Echec de l\'upload "' . $filename[$i] . '" !'  .'<br>';
-            }
+            $errors[] = 'Votre fichier "' . $filename[$i] . '" n\'est pas conforme' . '<br>' .
+            'Vous devez uploader un fichier de type png, gif, jpg, txt ou doc...' . '<br>';
+            
         } else {
-            echo $error;
-            return $message;
-        }
-    }
-}
+            // Si la taille est trop volumineuse
+            if($size == 0) {
+                $errors[] = 'Votre fichier "' . $filename[$i] . '" n\'est pas conforme' . '<br>' .
+                'Le fichier est trop gros...' . '<br>';
+            } else {
+                //S'il n'y a pas d'erreur, on upload
+                // A unique name is concatenated with a dot and the $extention avec l'extension récupérée
+                $filenameUniq = uniqid() . '.' .$extension;
+                // Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+                if(move_uploaded_file($_FILES['avatar']['tmp_name'][$i], $uploadDir . $filenameUniq)) {
+                    $messages[] = 'Upload du fichier "' . $filename[$i] . '" effectué avec succès !' .'<br>';
+                    // Sinon (la fonction renvoie FALSE).
+                } else {   
+                    $messages[] = 'Echec de l\'upload "' . $filename[$i] . '" !'  .'<br>';
+                } 
+            }
+        } 
+    }    
+}        
+
 
 // liste image upload
 $file = new FilesystemIterator('uploads');
@@ -81,15 +80,22 @@ if (isset($_POST['delete'])) {
             <a class="btn btn-light" style="margin-top:20px; color:red" href="upload.php">Rafraichir</a>
         </form>
     </div>
-    <br><h3 style="background-color:white; text-align:center">
+    
         <?php 
-        if (isset($message)) {
-            foreach ($message as $value) {
+        if (isset($messages)) {
+            echo '<br><h3 style="background-color:green; color:white; text-align:center">';
+            foreach ($messages as $value) {
             echo $value;
             }
-        }
+        }   echo '</h3><br>';
+        if (isset($errors)) {
+            echo '<br><h3 style="background-color:red; color:white; text-align:center">';
+            foreach ($errors as $value) {
+            echo $value;
+            }
+        }   echo '</h3><br>';
         ?>
-        </h3><br>
+        
     <div>
     
         <br><h2 style="text-align:center; background-color:darkturquoise; color:yellow">Avatar en stock :</h2><br>
