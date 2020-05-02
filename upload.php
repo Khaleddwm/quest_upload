@@ -18,15 +18,15 @@ if (isset($_POST['upload'])) {
         // obtenir uniquement l'extension (sans le point)
         $extension = pathinfo($_FILES['avatar']['name'][$i], PATHINFO_EXTENSION);
         // taile du fichier uploadé
-        $size = filesize($_FILES['avatar']['tmp_name'][$i]);
+        $size = $_FILES['avatar']['size'][$i];
         // Si l'extension n'est pas dans le tableau
         if(!in_array($extension, $extensions)) {
-            $message[] =  'Votre fichier "' . $filename[$i] . '" n\'est pas conforme' . '<br>' .
+            $error =  'Votre fichier "' . $filename[$i] . '" n\'est pas conforme' . '<br>' .
             'Vous devez uploader un fichier de type png, gif, jpg, txt ou doc...';
         }
         // Si la taille est trop volumineuse
         if($size > $sizeMax) {
-            $message[] = 'Votre fichier "' . $filename[$i] . '" n\'est pas conforme' . '<br>' .
+            $error = 'Votre fichier "' . $filename[$i] . '" n\'est pas conforme' . '<br>' .
             'Le fichier est trop gros...';
         }
         //S'il n'y a pas d'erreur, on upload
@@ -41,6 +41,7 @@ if (isset($_POST['upload'])) {
                 $message[] = 'Echec de l\'upload "' . $filename[$i] . '" !'  .'<br>';
             }
         } else {
+            echo $error;
             return $message;
         }
     }
@@ -66,7 +67,7 @@ if (isset($_POST['delete'])) {
     <title>Quest Upluoad</title>
 </head>
 
-<body style="background-color:darkblue/; color:white/; margin-bottom:100px">
+<body style="background-image:url('https://jeromeobiols.com/wordpress/wp-content/uploads/photo-montagne-vallee-blanche-chamonix-mont-blanc.jpg'); background-repeat:no-repeat; background-attachment:fixed; background-position:center;">
     <div>
         <h1 style="background-color:black; color:white; text-align:center">Quest Upload</h1>
         <h2 style="text-align:center; background-color:darkturquoise; color:yellow" for="imageUpload">Upload image</h2></br>
@@ -80,7 +81,7 @@ if (isset($_POST['delete'])) {
             <a class="btn btn-light" style="margin-top:20px; color:red" href="upload.php">Rafraichir</a>
         </form>
     </div>
-    <br><h3 style="text-align:center">
+    <br><h3 style="background-color:white; text-align:center">
         <?php 
         if (isset($message)) {
             foreach ($message as $value) {
