@@ -14,19 +14,18 @@ $extensions = ['jpg', 'jpeg', 'png', 'gif'];
 
 // Début des vérifications de sécurité...
 if (isset($_POST['upload'])) {
-    for($i = 0; $i < count($_FILES['avatars']['name']); $i++) {
+    for ($i = 0; $i < count($_FILES['avatars']['name']); $i++) {
         // obtenir uniquement l'extension (sans le point)
         $extension = pathinfo($_FILES['avatars']['name'][$i], PATHINFO_EXTENSION);
         // taile du fichier uploadé
         $size = $_FILES['avatars']['size'][$i];
         // Si l'extension n'est pas dans le tableau
-        if(!in_array($extension, $extensions)) {
+        if (!in_array($extension, $extensions)) {
             $errors[] = 'Fichier "' . $filename[$i] . '" non conforme: ' . '<br>' .
             'vous devez uploader un fichier de type png, gif, jpg, txt ou doc...' . '<br>';
-            
         } else {
             // Si la taille est trop volumineuse
-            if($size == 0) {
+            if ($size == 0) {
                 $errors[] = 'Fichier "' . $filename[$i] . '" non conforme: ' . '<br>' .
                 'le fichier est trop gros...' . '<br>';
             } else {
@@ -34,7 +33,7 @@ if (isset($_POST['upload'])) {
                 // A unique name is concatenated with a dot and the $extention avec l'extension récupérée
                 $filenameUniq = uniqid() . '.' .$extension;
                 // Si la fonction renvoie TRUE, c'est que ça a fonctionné...
-                if(move_uploaded_file($_FILES['avatars']['tmp_name'][$i], $uploadDir . $filenameUniq)) {
+                if (move_uploaded_file($_FILES['avatars']['tmp_name'][$i], $uploadDir . $filenameUniq)) {
                     $messages[] = 'Upload du fichier "' . $filename[$i] . '" effectué avec succès !' .'<br>';
                 // Sinon (la fonction renvoie FALSE).
                 } else {   
